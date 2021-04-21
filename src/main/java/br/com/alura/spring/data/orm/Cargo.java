@@ -1,6 +1,7 @@
 package br.com.alura.spring.data.orm;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cargos")
@@ -11,6 +12,10 @@ public class Cargo {
     private Integer id;
 
     private String descricao;
+
+    //relacionamento com a tabela funcionario
+    @OneToMany(mappedBy = "cargo")
+    private List<Funcionario> funcionario;
 
 
     public Integer getId() {
@@ -27,5 +32,14 @@ public class Cargo {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Cargo{" +
+                "id=" + id +
+                ", descricao='" + descricao + '\'' +
+                '}';
     }
 }
