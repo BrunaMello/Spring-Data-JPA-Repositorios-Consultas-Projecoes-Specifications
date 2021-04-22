@@ -6,7 +6,10 @@ import br.com.alura.spring.data.orm.UnidadeTrabalho;
 import br.com.alura.spring.data.repository.CargoRepository;
 import br.com.alura.spring.data.repository.FuncionarioRepository;
 import br.com.alura.spring.data.repository.UnidadeTrabalhoRepository;
-import net.bytebuddy.agent.builder.AgentBuilder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -49,7 +52,7 @@ public class CrudFuncionarioService {
                     atualizar(scanner);
                     break;
                 case 3:
-                    visualizar();
+                    visualizar(scanner);
                     break;
                 case 4:
                     deletar(scanner);
@@ -170,9 +173,26 @@ public class CrudFuncionarioService {
 
     }
 
-    private void visualizar() {
-        Iterable<Funcionario> funcionarios = funcionarioRepository.findAll();
-        funcionarios.forEach(funcionario -> System.out.println(funcionarios));
+    private void visualizar(Scanner scanner) {
+
+        //recebendo a paginacao
+        System.out.println("Qual pagina vc deseja vizualizar?");
+        Integer page = scanner.nextInt();
+
+        //criando um pagable para retornar a lista, para mudar a ordenacao pegar o nome da varialvel e usar a sort class
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "salario"));
+
+        //passar o pageble para o page
+        Page<Funcionario> funcionarios = funcionarioRepository.findAll(pageable);
+
+        System.out.println(funcionarios);
+
+        //mostar pagina atual
+        System.out.println("Pagina atual: " + funcionarios.getNumber());
+
+        //mostrar o total de elementos
+        System.out.println("Total elementos na consulta: " + funcionarios.getTotalElements());
+        funcionarios.forEach(System.out::println);
     }
 
     private void deletar(Scanner scanner) {

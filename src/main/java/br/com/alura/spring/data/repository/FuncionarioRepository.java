@@ -3,14 +3,15 @@ package br.com.alura.spring.data.repository;
 import br.com.alura.spring.data.orm.Funcionario;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-
+// para fazer paginacao usar o PagingAndSortingRepository
 @Repository
-public interface FuncionarioRepository extends CrudRepository<Funcionario, Integer> {
+public interface FuncionarioRepository extends PagingAndSortingRepository<Funcionario, Integer> {
 
     //query creations olhar a lista na documentacao
     //Derivated Queries
