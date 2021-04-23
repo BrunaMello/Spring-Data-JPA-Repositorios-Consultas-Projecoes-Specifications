@@ -1,6 +1,7 @@
 package br.com.alura.spring.data.service;
 
 import br.com.alura.spring.data.orm.Funcionario;
+import br.com.alura.spring.data.orm.FuncionarioProjecao;
 import br.com.alura.spring.data.repository.FuncionarioRepository;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class RelatoriosService {
             System.out.println("1 - Busca Funcionario por Nome");
             System.out.println("2 - Buscar por Nome, Data Contratacao, Salario");
             System.out.println("3 - Buscar por Data de Contratacao Superior");
-            System.out.println("4 - ");
+            System.out.println("4 - Relatorio Salario");
 
             int action = scanner.nextInt();
 
@@ -45,6 +46,8 @@ public class RelatoriosService {
                 case 3:
                     buscarPorDataSuperior(scanner);
                     break;
+                case 4:
+                    pesquisaFuncionarioSalario();
                 default:
                     system = false;
                     break;
@@ -52,12 +55,14 @@ public class RelatoriosService {
         }
     }
 
+
+
     private void buscaPorNome(Scanner scanner) {
 
         System.out.println("Escreva o nome do funcionario: ");
         String nome = scanner.next();
 
-        List<Funcionario> funcionarios = funcionarioRepository.findByNomeFuncionarioLike(nome);
+        List<Funcionario> funcionarios = funcionarioRepository.findByNomeLike(nome);
         funcionarios.forEach(System.out::println);
 
     }
@@ -89,7 +94,14 @@ public class RelatoriosService {
         list.forEach(System.out::println);
     }
 
+    private void pesquisaFuncionarioSalario() {
+        System.out.println("Pesquisa Gerada");
 
-
-
+        List<FuncionarioProjecao> list = funcionarioRepository.findFuncionarioSalario();
+        list.forEach(f -> System.out.println(
+                "Funcionario Id: " + f.getId() +
+                " Nome: " + f.getNome() +
+                " Salario: " + f.getSalario() +
+                "  CPF: " + f.getCpf()));
+    }
 }

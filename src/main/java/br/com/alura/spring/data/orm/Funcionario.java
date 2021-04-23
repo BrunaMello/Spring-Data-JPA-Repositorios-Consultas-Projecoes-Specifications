@@ -16,7 +16,7 @@ public class Funcionario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nomeFuncionario;
+    private String nome;
 
     private String cpf;
 
@@ -40,8 +40,8 @@ public class Funcionario {
 
     }
 
-    public Funcionario(String nomeFuncionario, String cpf, BigDecimal salario, LocalDate dataContratacao) {
-        this.nomeFuncionario = nomeFuncionario;
+    public Funcionario(String nome, String cpf, BigDecimal salario, LocalDate dataContratacao) {
+        this.nome = nome;
         this.cpf = cpf;
         this.salario = salario;
         this.dataContratacao = dataContratacao;
@@ -55,12 +55,12 @@ public class Funcionario {
         this.id = id;
     }
 
-    public String getNomeFuncionario() {
-        return nomeFuncionario;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeFuncionario(String nomeFuncionario) {
-        this.nomeFuncionario = nomeFuncionario;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCpf() {
@@ -107,11 +107,12 @@ public class Funcionario {
     public String toString() {
         return "Funcionario{" +
                 "id=" + id +
-                ", nomeFuncionario='" + nomeFuncionario + '\'' +
+                ", nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", salario=" + salario +
                 ", dataContratacao=" + dataContratacao +
                 ", cargo=" + cargo +
+                ", unidadeTrabalhos=" + unidadeTrabalhos +
                 '}';
     }
 }

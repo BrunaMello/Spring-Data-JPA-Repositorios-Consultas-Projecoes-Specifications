@@ -83,7 +83,7 @@ public class CrudFuncionarioService {
 
 
         Funcionario funcionario = new Funcionario();
-        funcionario.setNomeFuncionario(nome);
+        funcionario.setNome(nome);
         funcionario.setCpf(cpf);
         funcionario.setSalario(salario);
         funcionario.setCargo(cargo.get());
@@ -115,7 +115,7 @@ public class CrudFuncionarioService {
 
                 Funcionario funcionarionome = new Funcionario();
                 funcionarionome.setId(id);
-                funcionarionome.setNomeFuncionario(nome);
+                funcionarionome.setNome(nome);
 
                 funcionarioRepository.save(funcionarionome);
                 System.out.println("Nome atualizado com sucesso");
